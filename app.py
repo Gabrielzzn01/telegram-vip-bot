@@ -4,18 +4,20 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Bot Nexus Pag Online!"
+    return "VIP BOT ONLINE"
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
 
-    dados = request.json
+    data = request.json
 
-    print(dados)
+    print("NOVO PAGAMENTO:")
+    print(data)
 
-    return {
-        "status": "ok"
-    }, 200
+    if data.get("event") == "payment.confirmed":
+        print("Pagamento aprovado!")
+
+    return {"success": True}, 200
 
 if __name__ == "__main__":
     app.run()
